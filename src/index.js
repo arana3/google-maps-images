@@ -5,12 +5,16 @@ import StaticMapLocation,         { makeStaticMapLocation         } from './stat
 import StaticMapMarkerCollection, { makeStaticMapMarkerCollection } from './static-map/marker-collection.js';
 import StaticMapStyle,            { makeStaticMapStyle            } from './static-map/style.js';
 
+import StaticMapAuthenticatedFactory from './static-map/authenticated-factory.js';
+
 export {
 
     StaticMap,
     StaticMapLocation,
     StaticMapMarkerCollection,
     StaticMapStyle,
+
+    StaticMapAuthenticatedFactory,
 
     makeStaticMap,
     makeStaticMapLocation,
