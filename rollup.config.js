@@ -15,6 +15,7 @@ export default {
             exclude: 'node_modules/**',
             presets: 'es2015-rollup',  // www.npmjs.com/package/babel-preset-es2015-rollup
             plugins: [
+                'transform-class-properties',   // www.npmjs.com/package/babel-plugin-transform-class-properties
                 'transform-object-rest-spread'  // www.npmjs.com/package/babel-plugin-transform-object-rest-spread
             ]
         }),
