@@ -1,14 +1,29 @@
 // @flow
 
-type TypeStyleRules = {
+/** @see developers.google.com/maps/documentation/static-maps/styling#style-rules */
+export type TypeStyleRules = {
     [key: string]: string  // flowtype.org/docs/objects.html#objects-as-maps
 };
 
-type TypeParams = {
+/** @see developers.google.com/maps/documentation/static-maps/styling#style-syntax */
+export type TypeParams = {
     feature: string;
     element: string;
     rules:   TypeStyleRules
 };
+
+/** @see developers.google.com/maps/documentation/javascript/style-reference#stylers */
+export type TypeJsonStyler = {
+    [key: string]: (string | number)  // flowtype.org/docs/objects.html#objects-as-maps
+};
+
+/** @see developers.google.com/maps/documentation/javascript/style-reference#the-json-object */
+export type TypeJsonStyleObject = {
+    featureType: string,
+    elementType: string,
+    stylers:     TypeJsonStyler[]
+};
+
 
 /** @see developers.google.com/maps/documentation/static-maps/styling */
 export default class StaticMapStyle {
