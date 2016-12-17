@@ -66,6 +66,14 @@ export default class StaticMapStyle {
         return this;
     }
 
+    /** @see developers.google.com/maps/documentation/javascript/style-reference#the-json-object */
+    static fromJsonStyleObject(js: TypeJsonStyleObject): StaticMapStyle {
+        return new StaticMapStyle()
+            .feature(js.featureType)
+            .element(js.elementType)
+            .rules(convertJsonStylersToRules(js.stylers));
+    }
+
 }
 
 /**
