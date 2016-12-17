@@ -2,10 +2,11 @@
 
 import queryString from 'query-string';  // www.npmjs.com/package/query-string
 
-import StaticMapLocation         from './location.js';
-import StaticMapMarkerCollection from './marker-collection.js';
-import StaticMapStyle            from './style.js';
-import { BASE_URL_STATICMAP }    from '../constants.js';
+import StaticMapLocation            from './location.js';
+import StaticMapMarkerCollection    from './marker-collection.js';
+import StaticMapStyle               from './style.js';
+import type { TypeJsonStyleObject } from './style.js';
+import { BASE_URL_STATICMAP }       from '../constants.js';
 
 /**
  * queryString.stringify() accepts an object map whose values are either strings or arrays of strings.
@@ -126,6 +127,14 @@ export default class StaticMap {
 
     addStyles(styles: StaticMapStyle[]): StaticMap {
         this.styles = [...this.styles, ...styles];
+        return this;
+    }
+
+    /** @see developers.google.com/maps/documentation/javascript/style-reference#the-json-object */
+    addStylesFromJsonObjects(jsonStyleObjects: TypeJsonStyleObject[]): StaticMap {
+        this.addStyles(
+            jsonStyleObjects.map(js => StaticMapStyle.fromJsonStyleObject(js))
+        );
         return this;
     }
 
