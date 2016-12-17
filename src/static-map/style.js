@@ -68,6 +68,35 @@ export default class StaticMapStyle {
 
 }
 
+/**
+ * JSON Stylers use a different color format to the style rules of Static Maps,
+ * so the colors need to be converted:
+ *
+ *     JSON Stylers:    #RRGGBB
+ *     Static Maps:     0xRRGGBB
+ *
+ * @see developers.google.com/maps/documentation/javascript/style-reference#stylers
+ * @see developers.google.com/maps/documentation/static-maps/styling#style-rules
+ */
+function convertJsonStylersToRules(jsonStylers: TypeJsonStyler[]): TypeStyleRules {
+
+    const JSON_STYLER_COLOR_REGEX = /^#([0-9a-f]{6})$/i;
+    const rules: TypeStyleRules   = {};
+
+    jsonStylers.forEach(function (jsonStyler: TypeJsonStyler) {
+        const ruleKey:    string    = Object.keys(jsonStyler)[0];  // There's always just one key
+        let   ruleValue:  string    = String(jsonStyler[ruleKey]);
+        const colorMatch: ?string[] = ruleValue.match(JSON_STYLER_COLOR_REGEX);
+        if (Array.isArray(colorMatch)) {
+            ruleValue = '0x' + colorMatch[1];  // Element at index 1 contains the captured group (RRGGBB)
+        }
+        rules[ruleKey] = ruleValue;
+    });
+
+    return rules;
+
+}
+
 export function makeStaticMapStyle(): StaticMapStyle {
 
     return new StaticMapStyle();
