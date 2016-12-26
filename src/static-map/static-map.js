@@ -18,24 +18,12 @@ import type { TypeJsonStyleObject } from './style.js';
 import { generateSignature }        from './signature.js';
 import { BASE_URL_STATICMAP }       from '../constants.js';
 
+import type { TypeAuthDataApiKey, TypeAuthDataClient, TypeAuthData } from './types.js';
+
 
 //----------------------------------------------------------------------//
 //                              Flow types                              //
 //----------------------------------------------------------------------//
-
-type TypeAuthDataApiKey = {
-    type:   'apiKey',  // Sentinel property for disjoint union
-    apiKey: string
-};
-
-type TypeAuthDataClient = {
-    type:         'client',  // Sentinel property for disjoint union
-    clientId:     string,
-    clientSecret: string
-};
-
-/** @see flowtype.org/docs/disjoint-unions.html */
-type TypeAuthData = TypeAuthDataApiKey | TypeAuthDataClient;
 
 /**
  * queryString.stringify() accepts an object map whose values are either strings or arrays of strings.
