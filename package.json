@@ -9,6 +9,9 @@
     "type": "git",
     "url": "git@github.com:michaelhogg/google-maps-images.git"
   },
+  "files": [
+    "dist/google-maps-images.min.js"
+  ],
   "main": "dist/google-maps-images.min.js",
   "scripts": {
     "test": "eslint src && flow check",
