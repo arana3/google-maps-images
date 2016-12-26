@@ -7,8 +7,8 @@ export type TypeStyleRules = {
 
 /** @see developers.google.com/maps/documentation/static-maps/styling#style-syntax */
 export type TypeParams = {
-    feature: string;
-    element: string;
+    feature: string,
+    element: string,
     rules:   TypeStyleRules
 };
 

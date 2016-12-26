@@ -68,7 +68,7 @@ export default class StaticMap {
             ...this.params,
             markers: this.markerCollections.map((mc: StaticMapMarkerCollection) => mc.toString()),
             style:   this.styles.map((style: StaticMapStyle) => style.toString())
-        }
+        };
 
         if (this.visibleLocations.length > 0) {
             mergedParams.visible = this.visibleLocations.map((loc: StaticMapLocation) => loc.toString()).join('|');
