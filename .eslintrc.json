@@ -1,4 +1,13 @@
 {
+    // eslint.org/docs/user-guide/configuring#using-a-configuration-file
     "extends": "eslint:recommended",
-    "parser":  "babel-eslint"
+
+    // eslint.org/docs/user-guide/configuring#specifying-globals
+    "globals": {
+        "Class": false  // flowtype.org/docs/classes.html#classt-type
+    },
+
+    // eslint.org/docs/user-guide/configuring#specifying-parser
+    // github.com/babel/babel-eslint
+    "parser": "babel-eslint"
 }

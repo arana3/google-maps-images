@@ -14,8 +14,8 @@ export default class StaticMapMarkerCollection {
     }
 
     toString(): string {
-        const styles:    string[] = Object.keys(this.styles).map(key => key + ':' + this.styles[key]);
-        const locations: string[] = this.locations.map(location => location.toString());
+        const styles:    string[] = Object.keys(this.styles).map((key: string) => key + ':' + this.styles[key]);
+        const locations: string[] = this.locations.map((loc: StaticMapLocation) => loc.toString());
         const merged:    string[] = [...styles, ...locations];
         return merged.join('|');
     }

@@ -66,12 +66,12 @@ export default class StaticMap {
 
         const mergedParams: TypeParams = {
             ...this.params,
-            markers: this.markerCollections.map(markerCollection => markerCollection.toString()),
-            style:   this.styles.map(style => style.toString())
+            markers: this.markerCollections.map((mc: StaticMapMarkerCollection) => mc.toString()),
+            style:   this.styles.map((style: StaticMapStyle) => style.toString())
         }
 
         if (this.visibleLocations.length > 0) {
-            mergedParams.visible = this.visibleLocations.map(location => location.toString()).join('|');
+            mergedParams.visible = this.visibleLocations.map((loc: StaticMapLocation) => loc.toString()).join('|');
         }
 
         if (this.auth === null) {
@@ -88,7 +88,7 @@ export default class StaticMap {
                 break;
         }
 
-        let url = BASE_URL_STATICMAP + queryString.stringify(mergedParams);
+        let url: string = BASE_URL_STATICMAP + queryString.stringify(mergedParams);
 
         if (this.auth !== null && this.auth.type === 'client') {
             url += '&signature=' + generateSignature(url, this.auth.clientSecret);
@@ -184,7 +184,7 @@ export default class StaticMap {
     /** @see developers.google.com/maps/documentation/javascript/style-reference#the-json-object */
     addStylesFromJsonObjects(jsonStyleObjects: TypeJsonStyleObject[]): StaticMap {
         this.addStyles(
-            jsonStyleObjects.map(js => StaticMapStyle.fromJsonStyleObject(js))
+            jsonStyleObjects.map((js: TypeJsonStyleObject) => StaticMapStyle.fromJsonStyleObject(js))
         );
         return this;
     }

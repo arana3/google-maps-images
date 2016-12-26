@@ -39,12 +39,12 @@ export default class StaticMapStyle {
     }
 
     toString(): string {
-        const merged = {
+        const merged: Object = {
             feature: this.params.feature,
             element: this.params.element,
             ...this.params.rules
         };
-        const stringified: string[] = Object.keys(merged).map(key => key + ':' + merged[key]);
+        const stringified: string[] = Object.keys(merged).map((key: string) => key + ':' + merged[key]);
         return stringified.join('|');
     }
 
@@ -88,8 +88,8 @@ export default class StaticMapStyle {
  */
 function convertJsonStylersToRules(jsonStylers: TypeJsonStyler[]): TypeStyleRules {
 
-    const JSON_STYLER_COLOR_REGEX = /^#([0-9a-f]{6})$/i;
-    const rules: TypeStyleRules   = {};
+    const JSON_STYLER_COLOR_REGEX: RegExp         = /^#([0-9a-f]{6})$/i;
+    const rules:                   TypeStyleRules = {};
 
     jsonStylers.forEach(function (jsonStyler: TypeJsonStyler) {
         const ruleKey:    string    = Object.keys(jsonStyler)[0];  // There's always just one key

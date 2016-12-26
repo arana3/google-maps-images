@@ -36,7 +36,7 @@ export default class StaticMapAuthenticatedFactory {
 
     makeStaticMap(width: number, height: number): StaticMap {
 
-        const staticMap = new StaticMap(width, height);
+        const staticMap: StaticMap = new StaticMap(width, height);
 
         /** @see flowtype.org/docs/disjoint-unions.html */
         switch (this.auth.type) {

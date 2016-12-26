@@ -9,7 +9,7 @@ import buffer    from 'buffer/';     // www.npmjs.com/package/buffer
 import crypto    from 'crypto';      // www.npmjs.com/package/crypto-browserify
 import UrlParse  from 'url-parse';   // www.npmjs.com/package/url-parse
 
-const Buffer = buffer.Buffer;  // github.com/feross/buffer/tree/v5.0.2#usage
+const Buffer: Class<*> = buffer.Buffer;  // github.com/feross/buffer/tree/v5.0.2#usage
 
 
 //----------------------------------------------------------------------//
