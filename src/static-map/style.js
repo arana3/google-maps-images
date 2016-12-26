@@ -26,7 +26,7 @@ export type TypeJsonStyleObject = {
 
 
 /** @see developers.google.com/maps/documentation/static-maps/styling */
-export default class StaticMapStyle {
+export class StaticMapStyle {
 
     params: TypeParams;
 

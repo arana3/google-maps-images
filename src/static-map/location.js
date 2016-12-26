@@ -1,7 +1,7 @@
 // @flow
 
 /** @see developers.google.com/maps/documentation/static-maps/intro#Locations */
-export default class StaticMapLocation {
+export class StaticMapLocation {
 
     location: string;
 

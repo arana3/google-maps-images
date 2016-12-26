@@ -4,10 +4,10 @@
 //                         Import local modules                         //
 //----------------------------------------------------------------------//
 
-import StaticMap                                                     from './static-map.js';
-import StaticMapLocation                                             from './location.js';
-import StaticMapMarkerCollection, { makeStaticMapMarkerCollection  } from './marker-collection.js';
-import StaticMapStyle,            { makeStaticMapStyle             } from './style.js';
+import { StaticMap                                                 } from './static-map.js';
+import { StaticMapLocation                                         } from './location.js';
+import { StaticMapMarkerCollection, makeStaticMapMarkerCollection  } from './marker-collection.js';
+import { StaticMapStyle,            makeStaticMapStyle             } from './style.js';
 import type { TypeAuthDataApiKey, TypeAuthDataClient, TypeAuthData } from './types.js';
 
 
@@ -15,7 +15,7 @@ import type { TypeAuthDataApiKey, TypeAuthDataClient, TypeAuthData } from './typ
 //                            Exported class                            //
 //----------------------------------------------------------------------//
 
-export default class StaticMapAuthenticatedFactory {
+export class StaticMapAuthenticatedFactory {
 
     auth: TypeAuthData;
 

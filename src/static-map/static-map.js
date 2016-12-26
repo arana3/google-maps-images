@@ -11,12 +11,12 @@ import queryString from 'query-string';  // www.npmjs.com/package/query-string
 //                         Import local modules                         //
 //----------------------------------------------------------------------//
 
-import StaticMapLocation            from './location.js';
-import StaticMapMarkerCollection    from './marker-collection.js';
-import StaticMapStyle               from './style.js';
-import type { TypeJsonStyleObject } from './style.js';
-import { generateSignature }        from './signature.js';
-import { BASE_URL_STATICMAP }       from '../constants.js';
+import { StaticMapLocation         } from './location.js';
+import { StaticMapMarkerCollection } from './marker-collection.js';
+import { StaticMapStyle            } from './style.js';
+import type { TypeJsonStyleObject  } from './style.js';
+import { generateSignature         } from './signature.js';
+import { BASE_URL_STATICMAP        } from '../constants.js';
 
 import type { TypeAuthDataApiKey, TypeAuthDataClient, TypeAuthData } from './types.js';
 
@@ -41,7 +41,7 @@ type TypeParams = {
 //----------------------------------------------------------------------//
 
 /** @see developers.google.com/maps/documentation/static-maps/intro */
-export default class StaticMap {
+export class StaticMap {
 
     params:            TypeParams;
     markerCollections: StaticMapMarkerCollection[];

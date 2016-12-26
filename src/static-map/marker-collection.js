@@ -1,9 +1,9 @@
 // @flow
 
-import StaticMapLocation from './location.js';
+import { StaticMapLocation } from './location.js';
 
 /** @see developers.google.com/maps/documentation/static-maps/intro#Markers */
-export default class StaticMapMarkerCollection {
+export class StaticMapMarkerCollection {
 
     locations: StaticMapLocation[];
     styles:    { [key: string]: string };  // flowtype.org/docs/objects.html#objects-as-maps
