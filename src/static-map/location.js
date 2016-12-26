@@ -5,8 +5,9 @@ export default class StaticMapLocation {
 
     location: string;
 
-    constructor(location: string) {
-        this.location = location;
+    /** @private */
+    constructor(loc: string) {
+        this.location = loc;
     }
 
     toString(): string {
