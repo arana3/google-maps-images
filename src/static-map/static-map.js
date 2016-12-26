@@ -1,12 +1,41 @@
 // @flow
 
+//----------------------------------------------------------------------//
+//                          Import NPM modules                          //
+//----------------------------------------------------------------------//
+
 import queryString from 'query-string';  // www.npmjs.com/package/query-string
+
+
+//----------------------------------------------------------------------//
+//                         Import local modules                         //
+//----------------------------------------------------------------------//
 
 import StaticMapLocation            from './location.js';
 import StaticMapMarkerCollection    from './marker-collection.js';
 import StaticMapStyle               from './style.js';
 import type { TypeJsonStyleObject } from './style.js';
+import { generateSignature }        from './signature.js';
 import { BASE_URL_STATICMAP }       from '../constants.js';
+
+
+//----------------------------------------------------------------------//
+//                              Flow types                              //
+//----------------------------------------------------------------------//
+
+type TypeAuthDataApiKey = {
+    type:   'apiKey',  // Sentinel property for disjoint union
+    apiKey: string
+};
+
+type TypeAuthDataClient = {
+    type:         'client',  // Sentinel property for disjoint union
+    clientId:     string,
+    clientSecret: string
+};
+
+/** @see flowtype.org/docs/disjoint-unions.html */
+type TypeAuthData = TypeAuthDataApiKey | TypeAuthDataClient;
 
 /**
  * queryString.stringify() accepts an object map whose values are either strings or arrays of strings.
@@ -18,6 +47,11 @@ type TypeParams = {
     [key: string]: (string | string[])
 };
 
+
+//----------------------------------------------------------------------//
+//                            Exported class                            //
+//----------------------------------------------------------------------//
+
 /** @see developers.google.com/maps/documentation/static-maps/intro */
 export default class StaticMap {
 
@@ -25,26 +59,55 @@ export default class StaticMap {
     markerCollections: StaticMapMarkerCollection[];
     visibleLocations:  StaticMapLocation[];
     styles:            StaticMapStyle[];
+    auth:              TypeAuthData | null;
 
     constructor(width: number, height: number) {
+
         this.params = {
             size: width + 'x' + height
         };
+
         this.markerCollections = [];
         this.visibleLocations  = [];
         this.styles            = [];
+        this.auth              = null;
+
     }
 
     generateUrl(): string {
+
         const mergedParams: TypeParams = {
             ...this.params,
             markers: this.markerCollections.map(markerCollection => markerCollection.toString()),
             style:   this.styles.map(style => style.toString())
         }
+
         if (this.visibleLocations.length > 0) {
             mergedParams.visible = this.visibleLocations.map(location => location.toString()).join('|');
         }
-        return BASE_URL_STATICMAP + queryString.stringify(mergedParams);
+
+        if (this.auth === null) {
+            throw new Error('No authentication');
+        }
+
+        /** @see flowtype.org/docs/disjoint-unions.html */
+        switch (this.auth.type) {
+            case 'apiKey':
+                mergedParams.key = this.auth.apiKey;
+                break;
+            case 'client':
+                mergedParams.client = this.auth.clientId;
+                break;
+        }
+
+        let url = BASE_URL_STATICMAP + queryString.stringify(mergedParams);
+
+        if (this.auth !== null && this.auth.type === 'client') {
+            url += '&signature=' + generateSignature(url, this.auth.clientSecret);
+        }
+
+        return url;
+
     }
 
     centerLatLng(lat: number, lng: number): StaticMap {
@@ -138,13 +201,15 @@ export default class StaticMap {
         return this;
     }
 
-    apiKey(apiKey: string): StaticMap {
-        this.params.key = apiKey;
+    setApiKey(apiKey: string): StaticMap {
+        const authData: TypeAuthDataApiKey = { type: 'apiKey', apiKey };
+        this.auth = authData;
         return this;
     }
 
-    signature(signature: string): StaticMap {
-        this.params.signature = signature;
+    setClientCredentials(clientId: string, clientSecret: string): StaticMap {
+        const authData: TypeAuthDataClient = { type: 'client', clientId, clientSecret };
+        this.auth = authData;
         return this;
     }
 
