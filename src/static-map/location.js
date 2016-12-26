@@ -23,9 +23,3 @@ export default class StaticMapLocation {
     }
 
 }
-
-export function makeStaticMapLocation(location: string): StaticMapLocation {
-
-    return new StaticMapLocation(location);
-
-}
