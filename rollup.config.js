@@ -7,7 +7,11 @@ export default {
     dest:    'dist/google-maps-images.min.js',
     format:  'cjs',
     external: [
-        'query-string'  // www.npmjs.com/package/query-string
+        'base64-url',    // www.npmjs.com/package/base64-url
+        'buffer/',       // www.npmjs.com/package/buffer
+        'crypto',        // www.npmjs.com/package/crypto-browserify
+        'query-string',  // www.npmjs.com/package/query-string
+        'url-parse'      // www.npmjs.com/package/url-parse
     ],
     plugins: [
         flow(),
