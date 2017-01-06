@@ -45,8 +45,11 @@ export class StaticMapMarkerCollection {
         return this;
     }
 
-    icon(url: string): StaticMapMarkerCollection {
+    icon(url: string, doubleScale?: boolean = false): StaticMapMarkerCollection {
         this.styles.icon = encodeURI(url);
+        if (doubleScale) {
+            this.styles.scale = '2';  // @see stackoverflow.com/a/17130379
+        }
         return this;
     }
 
