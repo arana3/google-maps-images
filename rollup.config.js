@@ -8,8 +8,7 @@ export default {
     format:  'cjs',
     external: [
         'base64-url',    // www.npmjs.com/package/base64-url
-        'buffer/',       // www.npmjs.com/package/buffer
-        'crypto',        // www.npmjs.com/package/crypto-browserify
+        'jssha',         // www.npmjs.com/package/jssha
         'query-string',  // www.npmjs.com/package/query-string
         'url-parse'      // www.npmjs.com/package/url-parse
     ],
